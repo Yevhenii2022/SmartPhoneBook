@@ -2,7 +2,7 @@
   "name": "react-homework-template",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Yevhenii2022.github.io/goit-react-hw-07-phonebook/",
+  "homepage": "https://Yevhenii2022.github.io/SmartPhoneBook/",
   "dependencies": {
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
@@ -21,6 +21,7 @@
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-redux": "^8.0.7",
+    "react-router-dom": "^6.13.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.2",
     "redux-persist": "^6.0.0",
