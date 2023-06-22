@@ -144,7 +144,7 @@ export const MyAppBar = () => {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            PHONEBOOK
+            SMARTPHONEBOOK
           </Typography>
           <Search>
             <SearchIconWrapper>

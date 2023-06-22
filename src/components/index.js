@@ -4,3 +4,4 @@ export { MyAppBar } from './AppBar/AppBar';
 export { ContactsList } from './ContactsList/ContactsList';
 export { DropdownDeleteContact } from './DropdownDeleteContact/DropdownDeleteContact';
 export { Loader } from './Loader/Loader';
+export { SharedLayout } from './SharedLayout';

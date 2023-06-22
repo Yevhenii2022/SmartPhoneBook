@@ -75,7 +75,7 @@ export const AddContactForm = () => {
         onClick={handleOpen}
         sx={{ mb: 4, ml: 9.5 }}
       >
-        CREATE A NEW CONTACT
+        ADD NEW CONTACT
       </StyledButton>
       <Modal
         open={open}
