@@ -45,7 +45,7 @@ export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Routes>
-        <Route path="/" element={<SharedLayout />}>
+        <Route path="" element={<SharedLayout />}>
           <Route index element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

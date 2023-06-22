@@ -5,3 +5,5 @@ export { ContactsList } from './ContactsList/ContactsList';
 export { DropdownDeleteContact } from './DropdownDeleteContact/DropdownDeleteContact';
 export { Loader } from './Loader/Loader';
 export { SharedLayout } from './SharedLayout';
+export { LoginForm } from './Forms/LoginForm/LoginForm';
+export { RegisterForm } from './Forms/RegisterForm/RegisterForm';
