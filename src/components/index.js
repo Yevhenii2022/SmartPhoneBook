@@ -1,4 +1,4 @@
-export { AddContactForm } from './AddContactForm/AddContactForm';
+export { AddContactForm } from './Forms/AddContactForm/AddContactForm';
 export { Contacts } from './Contacts/Contacts';
 export { MyAppBar } from './AppBar/AppBar';
 export { ContactsList } from './ContactsList/ContactsList';
