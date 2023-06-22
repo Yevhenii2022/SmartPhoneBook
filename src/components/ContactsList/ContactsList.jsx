@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Box, Paper, Typography } from '@mui/material';
-import { selectContacts, selectIsLoading } from 'redux/selectors';
+import { selectContacts, selectIsLoading } from 'redux/contacts/selectors';
 import { Contacts } from '../Contacts/Contacts';
 
 export const ContactsList = () => {

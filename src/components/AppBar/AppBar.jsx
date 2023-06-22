@@ -15,8 +15,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import CallIcon from '@mui/icons-material/Call';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import { filter } from '../../redux/filterSlice';
-import { selectContacts } from 'redux/selectors';
+import { filter } from '../../redux/filters/filterSlice';
+import { selectContacts } from 'redux/contacts/selectors';
 import { Search, SearchIconWrapper, StyledInputBase } from './AppBar.styled';
 
 export const MyAppBar = () => {

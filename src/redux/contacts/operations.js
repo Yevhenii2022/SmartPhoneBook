@@ -1,8 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { showErrorMessage, showSuccessMessage } from '../utils/notifications';
+import {
+  showErrorMessage,
+  showSuccessMessage,
+} from '../../utils/notifications';
 
-axios.defaults.baseURL = 'https://648affc717f1536d65ea1aff.mockapi.io';
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/featchAll',
@@ -25,6 +28,27 @@ export const addContact = createAsyncThunk(
       showSuccessMessage(
         <span>
           New contact <b>"{contact.name}"</b> has been added in your phone book
+        </span>
+      );
+      return data;
+    } catch (error) {
+      showErrorMessage(error.message || 'Something went wrong...');
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const editContact = createAsyncThunk(
+  'contacts/editContact',
+  async (contact, thunkAPI) => {
+    try {
+      const { data } = await axios.patch(`/contacts/${contact.id}`, {
+        name: contact.name,
+        number: contact.number,
+      });
+      showSuccessMessage(
+        <span>
+          You have changed the contact under the name <b>"{contact.name}"</b>
         </span>
       );
       return data;

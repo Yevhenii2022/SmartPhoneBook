@@ -9,8 +9,8 @@ import {
   DialogTitle,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { deleteContact } from 'redux/operations';
-import { selectIsLoading } from 'redux/selectors';
+import { deleteContact } from 'redux/contacts/operations';
+import { selectIsLoading } from 'redux/contacts/selectors';
 
 export const DropdownDeleteContact = ({ id, name }) => {
   const dispatch = useDispatch();

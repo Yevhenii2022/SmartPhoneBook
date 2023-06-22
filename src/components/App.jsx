@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Contacts, Home, Login, NotFound, Register } from 'pages';
 import { SharedLayout } from './';
-import { fetchContacts } from 'redux/operations';
+import { fetchContacts } from 'redux/contacts/operations';
 
 const theme = createTheme({
   components: {

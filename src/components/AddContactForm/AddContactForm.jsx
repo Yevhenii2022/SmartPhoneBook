@@ -4,8 +4,11 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../../redux/operations';
-import { selectContacts, selectIsLoading } from '../../redux/selectors';
+import { addContact } from '../../redux/contacts/operations';
+import {
+  selectContacts,
+  selectIsLoading,
+} from '../../redux/contacts/selectors';
 import { styleModal, StyledButton } from './AddContactForm.styled';
 import { showInfoMessage } from '../../utils/notifications';
 import { formatPhoneNumber } from '../../utils/phoneFormatter';

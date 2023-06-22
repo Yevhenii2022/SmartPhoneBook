@@ -11,7 +11,10 @@ import {
 } from '@mui/material';
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import { selectFilteredContacts, selectIsLoading } from 'redux/selectors';
+import {
+  selectFilteredContacts,
+  selectIsLoading,
+} from 'redux/contacts/selectors';
 import { getColorFromName } from '../../utils/getColorFromName';
 import { getFirstTwoLetters } from '../../utils/getFirstTwoLetters';
 import { DropdownDeleteContact } from '../index';
