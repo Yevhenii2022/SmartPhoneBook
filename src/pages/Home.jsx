@@ -18,7 +18,7 @@ export const Home = () => {
       </Typography>
       <Box display="flex" justifyContent="center">
         <Button variant="contained" onClick={() => navigate('/login')}>
-          Login
+          Log in
         </Button>
         <Divider
           variant="middle"

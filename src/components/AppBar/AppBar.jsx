@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   AppBar,
   Box,
@@ -14,13 +15,15 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import CallIcon from '@mui/icons-material/Call';
-import MoreIcon from '@mui/icons-material/MoreVert';
+import HouseIcon from '@mui/icons-material/House';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { filter } from '../../redux/filters/filterSlice';
 import { selectContacts } from 'redux/contacts/selectors';
 import { Search, SearchIconWrapper, StyledInputBase } from './AppBar.styled';
 
 export const MyAppBar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const contacts = useSelector(selectContacts);
   const [value, setValue] = React.useState('');
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -68,8 +71,15 @@ export const MyAppBar = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem
+        onClick={() => {
+          navigate('/profile');
+          handleMenuClose();
+        }}
+      >
+        Profile
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>Log out</MenuItem>
     </Menu>
   );
 
@@ -90,26 +100,33 @@ export const MyAppBar = () => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      {/* <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
+      <MenuItem
+        onClick={() => {
+          navigate('/');
+          handleMenuClose();
+        }}
+      >
+        <IconButton size="large" aria-label="show home page" color="inherit">
+          <HouseIcon color="primary" />
         </IconButton>
-        <p>Messages</p>
-      </MenuItem> */}
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 4 new contacts"
-          color="inherit"
-        >
-          <Badge badgeContent={contacts.length} color="error" showZero>
-            <CallIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
+        <p>Home</p>
       </MenuItem>
+      {/* {isLoggedIn && ( */}
+      <MenuItem
+        onClick={() => {
+          navigate('/сontacts');
+          handleMenuClose();
+        }}
+      >
+        <IconButton size="large" aria-label="show contacts" color="inherit">
+          <Badge badgeContent={contacts.length} color="error" showZero>
+            <LocalPhoneIcon color="primary" />
+          </Badge>
+        </IconButton>
+        <p>Contacts</p>
+      </MenuItem>
+      {/* )} */}
+
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -118,9 +135,9 @@ export const MyAppBar = () => {
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          <AccountCircle color="primary" />
         </IconButton>
-        <p>Profile</p>
+        <p>User Menu</p>
       </MenuItem>
     </Menu>
   );
@@ -135,6 +152,7 @@ export const MyAppBar = () => {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
+            onClick={handleMobileMenuOpen}
           >
             <MenuIcon />
           </IconButton>
@@ -142,10 +160,12 @@ export const MyAppBar = () => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
+            sx={{ display: { xs: 'none', sm: 'block', cursor: 'pointer' } }}
+            onClick={() => navigate('/')}
           >
             SMARTPHONEBOOK
           </Typography>
+
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -158,32 +178,15 @@ export const MyAppBar = () => {
               aria-describedby="find a contact by name"
             />
           </Search>
+
           <Box sx={{ flexGrow: 1 }} />
           <Box
             sx={{ display: { xs: 'none', md: 'flex', alignItems: 'center' } }}
           >
-            {/* <IconButton
-              size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
-            >
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton> */}
-            <Typography
-              variant="body1"
-              noWrap
-              component="div"
-              // sx={{ display: { xs: 'none', sm: 'block' } }}
-            >
-              HELLO, User!
+            <Typography variant="body1" noWrap component="div">
+              Welcome, User!
             </Typography>
-            <IconButton
-              size="large"
-              aria-label="show 4 new contacts"
-              color="inherit"
-            >
+            <IconButton size="large" aria-label="show contacts" color="inherit">
               <Badge badgeContent={contacts.length} color="error" showZero>
                 <CallIcon />
               </Badge>
@@ -198,18 +201,6 @@ export const MyAppBar = () => {
               color="inherit"
             >
               <AccountCircle />
-            </IconButton>
-          </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
             </IconButton>
           </Box>
         </Toolbar>

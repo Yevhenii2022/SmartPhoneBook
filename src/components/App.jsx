@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Contacts, Home, Login, NotFound, Register } from 'pages';
+import { Contacts, Home, Login, NotFound, Profile, Register } from 'pages';
 import { SharedLayout } from './';
 import { fetchContacts } from 'redux/contacts/operations';
 
@@ -45,11 +45,12 @@ export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Routes>
-        <Route path="" element={<SharedLayout />}>
+        <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/сontacts" element={<Contacts />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
