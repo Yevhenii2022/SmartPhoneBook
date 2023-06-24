@@ -4,20 +4,18 @@ import {
   List,
   ListItem,
   ListItemAvatar,
-  IconButton,
   Paper,
   Typography,
   Box,
 } from '@mui/material';
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
 import {
   selectFilteredContacts,
   selectIsLoading,
 } from 'redux/contacts/selectors';
 import { getColorFromName } from '../../utils/getColorFromName';
 import { getFirstTwoLetters } from '../../utils/getFirstTwoLetters';
-import { DropdownDeleteContact } from '../index';
+import { DropdownDeleteContact, EditContactForm } from '../index';
 import {
   StyledPaper,
   StyledAvatar,
@@ -62,13 +60,7 @@ export const Contacts = ({ theme }) => {
                     <PhoneInTalkIcon />
                   </StyledAvatar>
                 </a>
-                <IconButton
-                  color="primary"
-                  aria-label="edit contact"
-                  data-id={id}
-                >
-                  <BorderColorIcon />
-                </IconButton>
+                <EditContactForm id={id} />
                 <DropdownDeleteContact id={id} name={name} />
               </StyledStack>
             }

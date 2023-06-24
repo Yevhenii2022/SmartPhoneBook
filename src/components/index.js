@@ -7,3 +7,4 @@ export { Loader } from './Loader/Loader';
 export { SharedLayout } from './SharedLayout';
 export { LoginForm } from './Forms/LoginForm/LoginForm';
 export { RegisterForm } from './Forms/RegisterForm/RegisterForm';
+export { EditContactForm } from './Forms/EditContactForm/EditContactForm';
