@@ -21,11 +21,14 @@ import { filter } from '../../redux/filters/filterSlice';
 import { selectContacts } from 'redux/contacts/selectors';
 import { Search, SearchIconWrapper, StyledInputBase } from './AppBar.styled';
 import { logOut } from 'redux/auth/operations';
+import { selectUserName } from 'redux/auth/selectors';
 
 export const MyAppBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const contacts = useSelector(selectContacts);
+  const userName = useSelector(selectUserName);
+  console.log(userName);
   const [value, setValue] = React.useState('');
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -192,7 +195,7 @@ export const MyAppBar = () => {
             sx={{ display: { xs: 'none', md: 'flex', alignItems: 'center' } }}
           >
             <Typography variant="body1" noWrap component="div">
-              Welcome, User!
+              Welcome, {userName}!
             </Typography>
             <IconButton size="large" aria-label="show contacts" color="inherit">
               <Badge badgeContent={contacts.length} color="error" showZero>

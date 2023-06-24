@@ -21,7 +21,7 @@ const handleRejected = (state, action) => {
 const authSlise = createSlice({
   name: 'auth',
   initialState: {
-    user: { email: null, name: null },
+    user: { email: '', name: '' },
     token: null,
     isLoaggedIn: false,
     isRefreshing: false,
@@ -50,7 +50,7 @@ const authSlise = createSlice({
 
       .addCase(logOut.pending, handlePending)
       .addCase(logOut.fulfilled, state => {
-        state.user = { email: null, name: null };
+        state.user = { email: '', name: '' };
         state.token = null;
         state.isLoaggedIn = false;
         state.isRefreshing = false;

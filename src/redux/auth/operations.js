@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { showSuccessMessage } from '../../utils/notifications';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 
@@ -15,6 +16,7 @@ export const register = createAsyncThunk(
     try {
       const { data } = await axios.post('/users/signup', user);
       setAuthHeader(data.token);
+      showSuccessMessage(`Nice to meet you ${data.user.name}!`);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -28,6 +30,7 @@ export const loginization = createAsyncThunk(
     try {
       const { data } = await axios.post('/users/login', user);
       setAuthHeader(data.token);
+      showSuccessMessage(`Nice to see you again, ${data.user.name}!`);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -41,6 +44,7 @@ export const logOut = createAsyncThunk(
     try {
       await axios.post('/users/logout');
       cleanAuthHeader();
+      showSuccessMessage(`See you in our app!`);
     } catch (error) {
       return rejectWithValue(error.message);
     }
