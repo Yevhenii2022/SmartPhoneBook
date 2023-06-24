@@ -20,6 +20,7 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { filter } from '../../redux/filters/filterSlice';
 import { selectContacts } from 'redux/contacts/selectors';
 import { Search, SearchIconWrapper, StyledInputBase } from './AppBar.styled';
+import { logOut } from 'redux/auth/operations';
 
 export const MyAppBar = () => {
   const dispatch = useDispatch();
@@ -79,7 +80,14 @@ export const MyAppBar = () => {
       >
         Profile
       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>Log out</MenuItem>
+      <MenuItem
+        onClick={() => {
+          dispatch(logOut());
+          handleMenuClose();
+        }}
+      >
+        Log out
+      </MenuItem>
     </Menu>
   );
 

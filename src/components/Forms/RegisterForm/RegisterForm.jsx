@@ -15,7 +15,8 @@ import { useFormik } from 'formik';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { register } from 'redux/auth/operations';
 
 const schema = yup.object().shape({
   name: yup
@@ -33,7 +34,7 @@ const schema = yup.object().shape({
     .required('Email address is required'),
   password: yup
     .string()
-    .min(8, 'The password must be at least 8 characters long')
+    .min(7, 'The password must be at least 7 characters long')
     .max(20, 'Lots of numbers')
     .required('Password is required'),
   confirm: yup
@@ -43,7 +44,7 @@ const schema = yup.object().shape({
 });
 
 export const RegisterForm = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirm, setShowConfirm] = React.useState(false);
@@ -56,8 +57,8 @@ export const RegisterForm = () => {
     },
     validationSchema: schema,
     onSubmit: (values, { setSubmitting }) => {
-      // const { name, email, password } = values;
-      // dispatch(register({ name, email, password }));
+      const { name, email, password } = values;
+      dispatch(register({ name, email, password }));
       setSubmitting(false);
     },
     validateOnBlur: true,
