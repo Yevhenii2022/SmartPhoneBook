@@ -21,12 +21,13 @@ import { filter } from '../../redux/filters/filterSlice';
 import { selectContacts } from 'redux/contacts/selectors';
 import { Search, SearchIconWrapper, StyledInputBase } from './AppBar.styled';
 import { logOut } from 'redux/auth/operations';
-import { selectUserName } from 'redux/auth/selectors';
+import { selectIsLoggedIn, selectUserName } from 'redux/auth/selectors';
 
 export const MyAppBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const contacts = useSelector(selectContacts);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const userName = useSelector(selectUserName);
   const [value, setValue] = React.useState('');
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -74,22 +75,47 @@ export const MyAppBar = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem
-        onClick={() => {
-          navigate('/profile');
-          handleMenuClose();
-        }}
-      >
-        Profile
-      </MenuItem>
-      <MenuItem
-        onClick={() => {
-          dispatch(logOut());
-          handleMenuClose();
-        }}
-      >
-        Log out
-      </MenuItem>
+      {isLoggedIn && (
+        <MenuItem
+          onClick={() => {
+            navigate('/profile');
+            handleMenuClose();
+          }}
+        >
+          Profile
+        </MenuItem>
+      )}
+      {isLoggedIn && (
+        <MenuItem
+          onClick={() => {
+            dispatch(logOut());
+            handleMenuClose();
+          }}
+        >
+          Log out
+        </MenuItem>
+      )}
+
+      {!isLoggedIn && (
+        <MenuItem
+          onClick={() => {
+            navigate('/login');
+            handleMenuClose();
+          }}
+        >
+          Log In
+        </MenuItem>
+      )}
+      {!isLoggedIn && (
+        <MenuItem
+          onClick={() => {
+            navigate('/register');
+            handleMenuClose();
+          }}
+        >
+          Sign Up
+        </MenuItem>
+      )}
     </Menu>
   );
 
@@ -121,21 +147,21 @@ export const MyAppBar = () => {
         </IconButton>
         <p>Home</p>
       </MenuItem>
-      {/* {isLoggedIn && ( */}
-      <MenuItem
-        onClick={() => {
-          navigate('/сontacts');
-          handleMenuClose();
-        }}
-      >
-        <IconButton size="large" aria-label="show contacts" color="inherit">
-          <Badge badgeContent={contacts.length} color="error" showZero>
-            <LocalPhoneIcon color="primary" />
-          </Badge>
-        </IconButton>
-        <p>Contacts</p>
-      </MenuItem>
-      {/* )} */}
+      {isLoggedIn && (
+        <MenuItem
+          onClick={() => {
+            navigate('/сontacts');
+            handleMenuClose();
+          }}
+        >
+          <IconButton size="large" aria-label="show contacts" color="inherit">
+            <Badge badgeContent={contacts.length} color="error" showZero>
+              <LocalPhoneIcon color="primary" />
+            </Badge>
+          </IconButton>
+          <p>Contacts</p>
+        </MenuItem>
+      )}
 
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -176,31 +202,42 @@ export const MyAppBar = () => {
             SMARTPHONEBOOK
           </Typography>
 
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              value={value}
-              onChange={handleInputChange}
-              placeholder="Find contact..."
-              inputProps={{ 'aria-label': 'search' }}
-              aria-describedby="find a contact by name"
-            />
-          </Search>
+          {isLoggedIn && (
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                value={value}
+                onChange={handleInputChange}
+                placeholder="Find contact..."
+                inputProps={{ 'aria-label': 'search' }}
+                aria-describedby="find a contact by name"
+              />
+            </Search>
+          )}
 
           <Box sx={{ flexGrow: 1 }} />
           <Box
             sx={{ display: { xs: 'none', md: 'flex', alignItems: 'center' } }}
           >
-            <Typography variant="body1" noWrap component="div">
-              Welcome, {userName}!
-            </Typography>
-            <IconButton size="large" aria-label="show contacts" color="inherit">
-              <Badge badgeContent={contacts.length} color="error" showZero>
-                <CallIcon />
-              </Badge>
-            </IconButton>
+            {isLoggedIn && (
+              <>
+                <Typography variant="body1" noWrap component="div">
+                  Welcome, {userName}!
+                </Typography>
+                <IconButton
+                  size="large"
+                  aria-label="show contacts"
+                  color="inherit"
+                >
+                  <Badge badgeContent={contacts.length} color="error" showZero>
+                    <CallIcon />
+                  </Badge>
+                </IconButton>
+              </>
+            )}
+
             <IconButton
               size="large"
               edge="end"

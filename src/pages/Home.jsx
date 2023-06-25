@@ -1,7 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, Divider, Paper, Typography } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { selectIsLoggedIn } from 'redux/auth/selectors';
 
 export const Home = () => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const navigate = useNavigate();
 
   return (
@@ -17,18 +20,26 @@ export const Home = () => {
         SmartPhone Book
       </Typography>
       <Box display="flex" justifyContent="center">
-        <Button variant="contained" onClick={() => navigate('/login')}>
-          Log in
-        </Button>
-        <Divider
-          variant="middle"
-          orientation="vertical"
-          flexItem
-          sx={{ mx: 3 }}
-        />
-        <Button variant="outlined" onClick={() => navigate('/register')}>
-          Sign Up
-        </Button>
+        {isLoggedIn ? (
+          <Button variant="contained" onClick={() => navigate('/сontacts')}>
+            Go to contacts
+          </Button>
+        ) : (
+          <>
+            <Button variant="contained" onClick={() => navigate('/login')}>
+              Log in
+            </Button>
+            <Divider
+              variant="middle"
+              orientation="vertical"
+              flexItem
+              sx={{ mx: 3 }}
+            />
+            <Button variant="outlined" onClick={() => navigate('/register')}>
+              Sign Up
+            </Button>
+          </>
+        )}
       </Box>
     </Paper>
   );
