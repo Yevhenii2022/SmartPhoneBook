@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Contacts, Home, Login, NotFound, Profile, Register } from 'pages';
 import { SharedLayout } from './';
 import { fetchContacts } from 'redux/contacts/operations';
+import { selectIsLoggedIn } from 'redux/auth/selectors';
+import { ProtectedRoute } from './Routes/ProtectedRoute';
+import { PrivateRoute } from './Routes/PrivateRoute';
 
 const theme = createTheme({
   components: {
@@ -34,11 +37,15 @@ const theme = createTheme({
 
 export const App = () => {
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  // console.log(isLoggedIn);
   // const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+    if (isLoggedIn) {
+      dispatch(fetchContacts());
+    }
+  }, [dispatch, isLoggedIn]);
 
   /* {isLoading && <Loader />} */
 
@@ -47,10 +54,38 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/сontacts" element={<Contacts />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/login"
+            element={
+              <ProtectedRoute defaultRoute="/сontacts">
+                <Login />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <ProtectedRoute defaultRoute="/сontacts">
+                <Register />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/сontacts"
+            element={
+              <PrivateRoute defaultRoute="/">
+                <Contacts />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute defaultRoute="/">
+                <Profile />
+              </PrivateRoute>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

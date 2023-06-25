@@ -28,7 +28,6 @@ export const MyAppBar = () => {
   const navigate = useNavigate();
   const contacts = useSelector(selectContacts);
   const userName = useSelector(selectUserName);
-  console.log(userName);
   const [value, setValue] = React.useState('');
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
