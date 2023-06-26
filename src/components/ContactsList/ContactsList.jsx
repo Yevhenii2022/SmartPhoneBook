@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { Box, Paper, Typography } from '@mui/material';
 import { selectContacts, selectIsLoading } from 'redux/contacts/selectors';
 import { Contacts } from '../Contacts/Contacts';
+import { FakeContactsCreate } from 'components';
 
 export const ContactsList = () => {
   const contacts = useSelector(selectContacts);
@@ -24,13 +25,14 @@ export const ContactsList = () => {
         {contacts.length === 0 && !isLoading ? (
           <Paper
             elevation={10}
-            sx={{ mx: 'auto', p: 1, maxWidth: 560 }}
+            sx={{ mx: 'auto', p: 2, maxWidth: 560 }}
             align="center"
           >
             <Typography variant="subtitle1: 'h4'" sx={{ my: 2 }}>
               There are no saved contacts. Use the button above to add new
               contacts.
             </Typography>
+            <FakeContactsCreate />
           </Paper>
         ) : (
           <Contacts />
