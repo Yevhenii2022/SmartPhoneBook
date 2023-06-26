@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -7,11 +7,12 @@ import {
   ThemeProvider,
 } from '@mui/material/styles';
 import { Contacts, Home, Login, NotFound, Profile, Register } from 'pages';
-import { SharedLayout } from './';
-import { fetchContacts } from 'redux/contacts/operations';
-import { selectIsLoggedIn } from 'redux/auth/selectors';
+import { Loader, SharedLayout } from './';
+import { selectIsRefreshing, selectUserToken } from 'redux/auth/selectors';
 import { ProtectedRoute } from './Routes/ProtectedRoute';
 import { PrivateRoute } from './Routes/PrivateRoute';
+import { refreshUser } from 'redux/auth/operations';
+import { selectIsLoading } from 'redux/contacts/selectors';
 
 let theme = createTheme({
   components: {
@@ -42,58 +43,64 @@ theme = responsiveFontSizes(theme);
 
 export const App = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  // console.log(isLoggedIn);
-  // const isLoading = useSelector(selectIsLoading);
+
+  const token = useSelector(selectUserToken);
+  const isRefreshing = useSelector(selectIsRefreshing);
+  const isLoading = useSelector(selectIsLoading);
+
+  const [mount, setMount] = useState(false);
 
   useEffect(() => {
-    if (isLoggedIn) {
-      dispatch(fetchContacts());
+    if (token && !mount) {
+      dispatch(refreshUser());
+      setMount(true);
     }
-  }, [dispatch, isLoggedIn]);
-
-  /* {isLoading && <Loader />} */
+  }, [dispatch, token, mount]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route index element={<Home />} />
-          <Route
-            path="/login"
-            element={
-              <ProtectedRoute defaultRoute="/сontacts">
-                <Login />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              <ProtectedRoute defaultRoute="/сontacts">
-                <Register />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/сontacts"
-            element={
-              <PrivateRoute defaultRoute="/">
-                <Contacts />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <PrivateRoute defaultRoute="/">
-                <Profile />
-              </PrivateRoute>
-            }
-          />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </ThemeProvider>
+    <>
+      <ThemeProvider theme={theme}>
+        <Routes>
+          <Route path="/" element={<SharedLayout />}>
+            <Route index element={<Home />} />
+            <Route
+              path="/login"
+              element={
+                <ProtectedRoute defaultRoute="/сontacts">
+                  <Login />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <ProtectedRoute defaultRoute="/сontacts">
+                  <Register />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/сontacts"
+              element={
+                <PrivateRoute defaultRoute="/">
+                  <Contacts />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <PrivateRoute defaultRoute="/">
+                  <Profile />
+                </PrivateRoute>
+              }
+            />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </ThemeProvider>
+
+      {(isLoading && <Loader />) || (isRefreshing && <Loader />)}
+    </>
   );
 };

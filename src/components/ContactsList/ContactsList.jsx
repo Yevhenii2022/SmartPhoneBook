@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { Box, Paper, Typography } from '@mui/material';
 import { selectContacts, selectIsLoading } from 'redux/contacts/selectors';

@@ -66,10 +66,11 @@ export const RegisterForm = () => {
 
   return (
     <Paper
+      elevation={10}
       sx={{
         p: 2,
-        mb: 8,
-        m: 'auto',
+        mt: 3,
+        mx: 'auto',
         width: '100%',
         backgroundColor: 'rgba(255,255,255,0.9)',
         maxWidth: 450,
