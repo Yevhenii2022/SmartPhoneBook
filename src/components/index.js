@@ -8,3 +8,4 @@ export { SharedLayout } from './SharedLayout';
 export { LoginForm } from './Forms/LoginForm/LoginForm';
 export { RegisterForm } from './Forms/RegisterForm/RegisterForm';
 export { EditContactForm } from './Forms/EditContactForm/EditContactForm';
+export { HomeIconAnime } from './HomeIconAnime/HomeIconAnime';

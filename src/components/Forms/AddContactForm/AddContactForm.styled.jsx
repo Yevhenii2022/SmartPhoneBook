@@ -16,7 +16,7 @@ export const styleModal = {
 };
 
 export const StyledButton = styled(Button)(({ theme }) => ({
-  // marginRight: theme.spacing(2),
+  marginTop: theme.spacing(3),
   // marginLeft: 0,
   // width: '100%',
   [theme.breakpoints.down('sm')]: {

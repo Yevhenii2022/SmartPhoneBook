@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {
+  createTheme,
+  responsiveFontSizes,
+  ThemeProvider,
+} from '@mui/material/styles';
 import { Contacts, Home, Login, NotFound, Profile, Register } from 'pages';
 import { SharedLayout } from './';
 import { fetchContacts } from 'redux/contacts/operations';
@@ -9,7 +13,7 @@ import { selectIsLoggedIn } from 'redux/auth/selectors';
 import { ProtectedRoute } from './Routes/ProtectedRoute';
 import { PrivateRoute } from './Routes/PrivateRoute';
 
-const theme = createTheme({
+let theme = createTheme({
   components: {
     MuiCssBaseline: {
       styleOverrides: {
@@ -34,6 +38,7 @@ const theme = createTheme({
     },
   },
 });
+theme = responsiveFontSizes(theme);
 
 export const App = () => {
   const dispatch = useDispatch();
