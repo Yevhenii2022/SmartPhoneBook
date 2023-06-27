@@ -69,7 +69,7 @@ export const RegisterForm = () => {
       elevation={10}
       sx={{
         p: 2,
-        mt: 3,
+        mt: 2,
         mx: 'auto',
         width: '100%',
         backgroundColor: 'rgba(255,255,255,0.9)',

@@ -7,12 +7,12 @@ export const styleModal = {
   left: '50%',
   margin: 0,
   transform: 'translate(-50%, -50%)',
-  width: 390,
+  width: 370,
   bgcolor: 'background.paper',
   border: '2px solid #303f9f',
   borderRadius: 1.5,
   boxShadow: 24,
-  p: 4,
+  p: 3.5,
 };
 
 export const StyledButton = styled(Button)(({ theme }) => ({

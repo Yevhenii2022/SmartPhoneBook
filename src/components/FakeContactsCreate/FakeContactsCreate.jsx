@@ -11,11 +11,11 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 280,
+  width: 290,
   bgcolor: 'background.paper',
   borderRadius: 1,
   boxShadow: 24,
-  p: 2,
+  p: 2.5,
 };
 
 export const FakeContactsCreate = () => {
