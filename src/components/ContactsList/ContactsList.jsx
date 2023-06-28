@@ -1,12 +1,19 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box, Paper, Typography } from '@mui/material';
 import { selectContacts, selectIsLoading } from 'redux/contacts/selectors';
 import { Contacts } from '../Contacts/Contacts';
 import { FakeContactsCreate } from 'components';
+import { useEffect } from 'react';
+import { fetchContacts } from 'redux/contacts/operations';
 
 export const ContactsList = () => {
+  const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
   const isLoading = useSelector(selectIsLoading);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     <Box

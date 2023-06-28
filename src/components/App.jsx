@@ -8,16 +8,11 @@ import {
 } from '@mui/material/styles';
 import { Contacts, Home, Login, NotFound, Profile, Register } from 'pages';
 import { Loader, SharedLayout } from './';
-import {
-  selectIsLoggedIn,
-  selectIsRefreshing,
-  selectUserToken,
-} from 'redux/auth/selectors';
+import { selectIsRefreshing, selectUserToken } from 'redux/auth/selectors';
 import { ProtectedRoute } from './Routes/ProtectedRoute';
 import { PrivateRoute } from './Routes/PrivateRoute';
 import { refreshUser } from 'redux/auth/operations';
 import { selectIsLoading } from 'redux/contacts/selectors';
-import { fetchContacts } from 'redux/contacts/operations';
 
 export const App = () => {
   const [mode, setMode] = useState(false);
@@ -59,13 +54,8 @@ export const App = () => {
   const token = useSelector(selectUserToken);
   const isRefreshing = useSelector(selectIsRefreshing);
   const isLoading = useSelector(selectIsLoading);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const [mount, setMount] = useState(false);
-
-  useEffect(() => {
-    if (isLoggedIn) dispatch(fetchContacts());
-  }, [dispatch, isLoggedIn]);
 
   useEffect(() => {
     if (token && !mount) {
