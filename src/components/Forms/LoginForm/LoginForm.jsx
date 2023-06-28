@@ -55,7 +55,7 @@ export const LoginForm = () => {
         mt: 2,
         mx: 'auto',
         width: '100%',
-        backgroundColor: 'rgba(255,255,255,0.9)',
+        // backgroundColor: 'rgba(255,255,255,0.9)',
         maxWidth: 450,
       }}
     >

@@ -14,34 +14,41 @@ import { PrivateRoute } from './Routes/PrivateRoute';
 import { refreshUser } from 'redux/auth/operations';
 import { selectIsLoading } from 'redux/contacts/selectors';
 
-let theme = createTheme({
-  components: {
-    MuiCssBaseline: {
-      styleOverrides: {
-        html: {
-          minHeight: '100%',
-        },
-        body: {
-          backgroundImage:
-            'linear-gradient(180deg, #ffffff 0, #f2f4f5 25%, #d1dde3 50%, #b1c6d2 75%, #94b2c2 100%)',
-        },
-        '&::-webkit-scrollbar': {
-          width: '8px',
-        },
-        '&::-webkit-scrollbar-thumb': {
-          backgroundColor: '#e0e0e0;',
-          borderRadius: '4px',
-        },
-        '&::-webkit-scrollbar-thumb:hover': {
-          backgroundColor: '#b4afaf',
+export const App = () => {
+  const [mode, setMode] = useState(false);
+
+  let theme = createTheme({
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: {
+          html: {
+            minHeight: '100%',
+          },
+          body: {
+            backgroundImage:
+              'linear-gradient(180deg, #ffffff 0, #f2f4f5 25%, #d1dde3 50%, #b1c6d2 75%, #94b2c2 100%)',
+          },
+          '&::-webkit-scrollbar': {
+            width: '8px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: '#e0e0e0;',
+            borderRadius: '4px',
+          },
+          '&::-webkit-scrollbar-thumb:hover': {
+            backgroundColor: '#b4afaf',
+          },
         },
       },
     },
-  },
-});
-theme = responsiveFontSizes(theme);
+    palette: {
+      mode: mode ? 'dark' : 'light',
+    },
+  });
+  theme = responsiveFontSizes(theme);
 
-export const App = () => {
+  const handleMode = () => setMode(!mode);
+
   const dispatch = useDispatch();
 
   const token = useSelector(selectUserToken);
@@ -61,7 +68,7 @@ export const App = () => {
     <>
       <ThemeProvider theme={theme}>
         <Routes>
-          <Route path="/" element={<SharedLayout />}>
+          <Route path="/" element={<SharedLayout handleMode={handleMode} />}>
             <Route index element={<Home />} />
             <Route
               path="/login"

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, TextField, Modal, Box, IconButton } from '@mui/material';
+import { Button, TextField, Modal, IconButton } from '@mui/material';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useFormik } from 'formik';
@@ -10,7 +10,7 @@ import {
   selectContacts,
   selectIsLoading,
 } from '../../../redux/contacts/selectors';
-import { styleModal } from './EditContactForm.styled';
+import { StyledPaper } from './EditContactForm.styled';
 import { showInfoMessage } from '../../../utils/notifications';
 import { formatPhoneNumber } from '../../../utils/phoneFormatter';
 
@@ -59,7 +59,6 @@ export const EditContactForm = ({ id }) => {
         setSubmitting(false);
         return;
       }
-
       // resetForm();
       dispatch(editContact({ id, name, number }));
       setSubmitting(false);
@@ -84,7 +83,7 @@ export const EditContactForm = ({ id }) => {
         aria-labelledby="modal-add-contact-title"
         aria-describedby="modal-add-contact-description"
       >
-        <Box sx={styleModal}>
+        <StyledPaper>
           <form
             style={{
               display: 'flex',
@@ -147,7 +146,7 @@ export const EditContactForm = ({ id }) => {
               EDIT CONTACT
             </Button>
           </form>
-        </Box>
+        </StyledPaper>
       </Modal>
     </>
   );

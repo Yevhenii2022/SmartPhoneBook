@@ -1,16 +1,14 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Container, CssBaseline } from '@mui/material';
 import { ToastContainer } from 'react-toastify';
-import { Loader, MyAppBar } from './';
+import { MyAppBar } from './';
 
-export const SharedLayout = () => {
+export const SharedLayout = ({ handleMode }) => {
   return (
     <Container maxWidth="lg">
-      <MyAppBar></MyAppBar>
-      <Suspense fallback={<Loader />}>
-        <Outlet />
-      </Suspense>
+      <MyAppBar handleMode={handleMode}></MyAppBar>
+      <Outlet />
       <CssBaseline />
       <ToastContainer />
     </Container>

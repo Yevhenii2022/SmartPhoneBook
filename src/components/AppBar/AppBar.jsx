@@ -10,6 +10,7 @@ import {
   Badge,
   MenuItem,
   Menu,
+  Switch,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
@@ -23,7 +24,7 @@ import { Search, SearchIconWrapper, StyledInputBase } from './AppBar.styled';
 import { logOut } from 'redux/auth/operations';
 import { selectIsLoggedIn, selectUserName } from 'redux/auth/selectors';
 
-export const MyAppBar = () => {
+export const MyAppBar = ({ handleMode }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const contacts = useSelector(selectContacts);
@@ -218,6 +219,9 @@ export const MyAppBar = () => {
           )}
 
           <Box sx={{ flexGrow: 1 }} />
+
+          <Switch onClick={handleMode} color="default" />
+
           <Box
             sx={{ display: { xs: 'none', md: 'flex', alignItems: 'center' } }}
           >
@@ -237,7 +241,6 @@ export const MyAppBar = () => {
                 </IconButton>
               </>
             )}
-
             <IconButton
               size="large"
               edge="end"

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, TextField, Modal, Box } from '@mui/material';
+import { Button, TextField, Modal } from '@mui/material';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -9,7 +9,7 @@ import {
   selectContacts,
   selectIsLoading,
 } from '../../../redux/contacts/selectors';
-import { styleModal, StyledButton } from './AddContactForm.styled';
+import { StyledButton, StyledPaper } from './AddContactForm.styled';
 import { showInfoMessage } from '../../../utils/notifications';
 import { formatPhoneNumber } from '../../../utils/phoneFormatter';
 
@@ -86,7 +86,7 @@ export const AddContactForm = () => {
         aria-labelledby="modal-add-contact-title"
         aria-describedby="modal-add-contact-description"
       >
-        <Box sx={styleModal}>
+        <StyledPaper>
           <form
             style={{
               display: 'flex',
@@ -150,7 +150,7 @@ export const AddContactForm = () => {
               ADD CONTACT
             </Button>
           </form>
-        </Box>
+        </StyledPaper>
       </Modal>
     </>
   );
