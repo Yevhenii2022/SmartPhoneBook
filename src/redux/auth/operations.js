@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { showSuccessMessage } from '../../utils/notifications';
-import { fetchContacts } from 'redux/contacts/operations';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 
@@ -31,7 +30,6 @@ export const loginization = createAsyncThunk(
     try {
       const { data } = await axios.post('/users/login', user);
       setAuthHeader(data.token);
-      dispatch(fetchContacts());
       showSuccessMessage(`Nice to see you again, ${data.user.name}!`);
       return data;
     } catch (error) {
@@ -61,7 +59,6 @@ export const refreshUser = createAsyncThunk(
 
     try {
       const { data } = await axios.get('/users/current');
-      dispatch(fetchContacts());
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
